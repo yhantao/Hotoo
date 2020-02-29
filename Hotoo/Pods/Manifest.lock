@@ -1,0 +1,26 @@
+PODS:
+  - MJRefresh (3.3.1)
+  - ReactiveObjC (3.1.1)
+  - SDWebImage (5.5.2):
+    - SDWebImage/Core (= 5.5.2)
+  - SDWebImage/Core (5.5.2)
+
+DEPENDENCIES:
+  - MJRefresh
+  - ReactiveObjC
+  - SDWebImage
+
+SPEC REPOS:
+  trunk:
+    - MJRefresh
+    - ReactiveObjC
+    - SDWebImage
+
+SPEC CHECKSUMS:
+  MJRefresh: eeda70fbf0ad277f3178cef1cd0c3532591d6237
+  ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
+  SDWebImage: 4d5c027c935438f341ed33dbac53ff9f479922ca
+
+PODFILE CHECKSUM: a3926abbd276f5297e0d6d52ddc262eda9eb3fb3
+
+COCOAPODS: 1.8.4

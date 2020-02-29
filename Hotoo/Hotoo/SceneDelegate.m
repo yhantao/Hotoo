@@ -1,4 +1,6 @@
 #import "SceneDelegate.h"
+#import "MainTabBarController.h"
+#import "HTColorUtil.h"
 
 @interface SceneDelegate ()
 
@@ -11,6 +13,17 @@
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
     // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+    UIWindowScene *windowScene = (UIWindowScene *)scene;
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.windowScene = windowScene;
+    MainTabBarController *tc = [[MainTabBarController alloc] init];
+    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:tc];
+    nc.navigationBar.translucent = YES;
+    nc.navigationBar.barTintColor = [UIColor orange_ht];
+    self.window.rootViewController = nc;
+    [self.window makeKeyAndVisible];
+    
+    
 }
 
 
