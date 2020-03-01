@@ -23,7 +23,7 @@
 
 - (void) setupCommands{
     __weak typeof(self) welf1 = self;
-    _fetchHotWordCommand = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
+    _fetchHotWordCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
             __strong typeof(welf1) sself1 = self;
             [sself1 requestForHotWordSuccessWithBlock:^(BOOL success, NSArray *arr) {

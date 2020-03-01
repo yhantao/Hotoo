@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HTDetailEntity.h"
 
 
-@interface HTSearchEntity : NSObject
+@interface HTSearchEntity : NSObject <HTDetailEntityDelegate>
 
-@property(nonatomic,copy)NSString *docid;
+@property(nonatomic,strong)NSString *docid;
 @property(nonatomic,copy)NSString *title;
 @property(nonatomic,copy)NSString *skipID;
 @property(nonatomic,copy)NSString *dkeys;

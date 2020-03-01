@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HTDetailEntity.h"
 
 
-@interface HTNewsEntity : NSObject <NSCoding>
+@interface HTNewsEntity : NSObject <NSCoding, HTDetailEntityDelegate>
 
 @property (nonatomic,strong) NSString *title;
 @property (nonatomic,strong) NSNumber *replyCount;
@@ -21,6 +22,8 @@
 @property (nonatomic,strong) NSNumber *imgType;
 @property (nonatomic,strong) NSNumber *hasHead;
 @property (nonatomic,strong) NSArray *imgextra;
+@property (nonatomic,strong) NSString *docid;
+@property (nonatomic,strong) NSString *boardid;
 
 
 

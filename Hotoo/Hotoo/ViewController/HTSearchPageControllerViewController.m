@@ -15,6 +15,7 @@
 #import "NSObject+RACLifting.h"
 #import "HTSearchEntity.h"
 #import "HTSearchCell.h"
+#import "HTNewsDetailViewController.h"
 
 @interface HTSearchPageControllerViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
@@ -46,7 +47,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-
+    
+    // navigation bar
+    // bar button item color
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
+    
     // search bar
     UISearchBar *searchBar = [[UISearchBar alloc] init];
     [self.view addSubview:searchBar];
@@ -149,7 +155,7 @@
         UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(self.maxRight, self.maxBottom, 0, 0)];
         [button setTitle:[NSString stringWithFormat:@"  %@  ",title] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
+        button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:15];
         
         button.layer.borderWidth = 0.5;
         button.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -190,6 +196,7 @@
             HTSearchEntity *entity = [HTSearchEntity new];
             [entity setTitle:dict[@"title"]];
             [entity setPtime:dict[@"ptime"]];
+            [entity setDocid:dict[@"docid"]];
             [tmpArr addObject:entity];
         }
         sself.searchListArray = [tmpArr copy];
@@ -216,6 +223,17 @@
     HTSearchEntity *entity = self.searchListArray[indexPath.row];
     [cell layoutViews:entity.title andTime:entity.ptime];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    HTSearchEntity *model = self.searchListArray[indexPath.row];
+    NSCharacterSet *cset = [NSCharacterSet characterSetWithCharactersInString:@"_"];
+    NSRange range = [model.docid rangeOfCharacterFromSet:cset];
+    if (range.location != NSNotFound) {
+        return;
+    }
+    HTNewsDetailViewController *detailView = [[HTNewsDetailViewController alloc] initWithURL:nil withEntity:model];
+    [self showViewController:detailView sender:self];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

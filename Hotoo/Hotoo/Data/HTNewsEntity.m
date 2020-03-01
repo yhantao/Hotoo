@@ -22,6 +22,8 @@
     [model setValue:dict[@"ptime"] forKey:@"ptime"];
     [model setValue:dict[@"imgType"] forKey:@"imgType"];
     [model setValue:dict[@"hasHead"] forKey:@"hasHead"];
+    [model setValue:dict[@"docid"] forKey:@"docid"];
+    [model setValue:dict[@"boardid"] forKey:@"boardid"];
     
     // extra imgs
     if (dict[@"imgextra"] && [dict[@"imgextra"] isKindOfClass:[NSArray class]]){

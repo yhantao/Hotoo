@@ -227,10 +227,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     HTNewsEntity *model = self.newsList[indexPath.row];
-    if(!model.url || ![model.url isKindOfClass:[NSString class]] || model.url.length == 0){
+    NSCharacterSet *cset = [NSCharacterSet characterSetWithCharactersInString:@"_"];
+    NSRange range = [model.docid rangeOfCharacterFromSet:cset];
+    if (range.location != NSNotFound) {
         return;
     }
-    HTNewsDetailViewController *detailView = [[HTNewsDetailViewController alloc] initWithURL:model.url];
+    HTNewsDetailViewController *detailView = [[HTNewsDetailViewController alloc] initWithURL:model.url withEntity:model];
     [self showViewController:detailView sender:self];
 }
 
