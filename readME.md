@@ -9,9 +9,31 @@
 ###### 2.实现
 实现都是手码，除了launch storyboard没用storyboard和xib
 ###### 3.集成
-主要集成了MJRefresh，ReactiveCocoa，SDWebImage，貌似iOS 13.3.1集成reactive objc有问题，还在调试，目前只适配了iOS 13+刘海屏机型
+主要用cocoapods集成了MJRefresh，ReactiveCocoa，SDWebImage，貌似iOS 13.3.1集成reactive objc有问题，还在调试，目前只适配了iOS 13+刘海屏机型
+如果没有setup过Cocoapods,可按照以下步骤setup
+>1.Install Xcode 4.4.1 (or newer) from the Mac App Store.</br>
+>2.Open Xcode, and go to Preferences, then select the Downloads tab.</br>
+>3.Install the Command Line Tools by clicking on the Install button next to that item in the Components list.</br>
+>4.When Xcode and the Command Line Tools are installed, open Terminal and update Gem:</br>
 ```
-	pod install
+sudo gem update --system
+```
+>5.Install CocoaPods:</br>
+```
+sudo gem install cocoapods
+```
+ 
+>6.Setup CocoaPods:</br>
+```
+pod setup
+```
+如果已经setup好了Cocoapods，进入工程目录
+```
+cd [YOUR_LOCAL_PROJECT_NAME]/Hotoo
+```
+然后完成集成
+```
+pod install
 ```
 ###### 3.效果
 <img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo2.jpg" alt="Drawing" width="200px" />x
