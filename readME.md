@@ -11,9 +11,9 @@
 ###### 3.集成
 主要集成了MJRefresh，ReactiveCocoa，SDWebImage，貌似iOS 13.3.1集成reactive objc有问题，还在调试，目前只适配了iOS 13+刘海屏机型
 ###### 3.效果
-<img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo2.jpg" alt="Drawing" width="200px" />
-<img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo3.jpg" alt="Drawing" width="200px" />
-<img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo4.jpg" alt="Drawing" width="200px" />
+<img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo2.jpg" alt="Drawing" width="200px" />x
+<img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo3.jpg" alt="Drawing" width="200px" />x
+<img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo4.jpg" alt="Drawing" width="200px" />x
 <img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo5.jpg" alt="Drawing" width="200px" />
 
 
