@@ -36,9 +36,10 @@ cd [YOUR_LOCAL_PROJECT_NAME]/Hotoo
 pod install
 ```
 ###### 3.效果
-<img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo2.jpg" alt="Drawing" width="200px" />x
-<img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo3.jpg" alt="Drawing" width="200px" />x
-<img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo4.jpg" alt="Drawing" width="200px" />x
-<img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo5.jpg" alt="Drawing" width="200px" />
+<img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo2.jpg" alt="Drawing" width="160px" />x
+<img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo3.jpg" alt="Drawing" width="160px" />x
+<img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo4.jpg" alt="Drawing" width="160px" />x
+<img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo5.jpg" alt="Drawing" width="160px" />x
+<img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo6.jpg" alt="Drawing" width="160px" />
 
 
