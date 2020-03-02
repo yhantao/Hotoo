@@ -10,4 +10,15 @@
 
 @implementation HTSimilarNewsEntity
 
+-(instancetype) initWithDict:(NSDictionary *)dict{
+    self = [super init];
+    if(self){
+        _title = dict[@"title"];
+        NSString *ptime = dict[@"ptime"];
+        _ptime = [ptime substringWithRange:NSMakeRange(5, 11)];
+        _imgsrc = dict[@"imgsrc"];
+        _docid = dict[@"docID"];
+    }
+    return self;
+}
 @end

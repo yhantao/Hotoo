@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HTDetailEntity.h"
 
-@interface HTSimilarNewsEntity : NSObject
+@interface HTSimilarNewsEntity : NSObject <HTDetailEntityDelegate>
 
 @property(nonatomic,copy)NSString *title;
 
@@ -18,7 +19,9 @@
 
 @property(nonatomic,copy)NSString *ptime;
 
-@property(nonatomic,copy)NSString *id;
+@property(nonatomic,strong)NSString *docid;
+
+-(instancetype) initWithDict:(NSDictionary *)dict;
 
 @end
 

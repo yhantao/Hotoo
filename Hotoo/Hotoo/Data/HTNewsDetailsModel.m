@@ -13,6 +13,7 @@
 #import "DataManager.h"
 #import "HTSimilarNewsEntity.h"
 #import "HTNewsDetailsImageEntity.h"
+#import "HTSimilarNewsEntity.h"
 
 @implementation HTNewsDetailsModel
 
@@ -21,6 +22,7 @@
     if (self = [super init]) {
         _entity = entity;
         [self setupRACCommands];
+        _sameNews = [NSMutableArray array];
     }
     return self;
 }
@@ -29,10 +31,13 @@
     __weak typeof(self) welf1 = self;
     _fetchNewsDetailCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-            __weak typeof(welf1) sself1 = self;
+            __strong typeof(welf1) sself1 = self;
             [sself1 requestForNewsDetailSuccess:^(BOOL success, NSDictionary *result) {
-                
-                self.detailEntity = [HTNewsDetailsEntity detailsEntityWithDict:result[self.entity.docid]];
+                sself1.detailEntity = [HTNewsDetailsEntity detailsEntityWithDict:result[self.entity.docid]];
+                for (NSDictionary *dict in result[self.entity.docid][@"relative_sys"]){
+                    HTSimilarNewsEntity *simEntity = [[HTSimilarNewsEntity alloc] initWithDict:dict];
+                    [sself1.sameNews addObject:simEntity];
+                }
                 [subscriber sendCompleted];
             }];
             return nil;
@@ -72,7 +77,7 @@
     [html appendFormat:@"<link rel=\"stylesheet\" href=\"%@\">",[[NSBundle mainBundle] URLForResource:@"HTNewsDetails.css" withExtension:nil]];
     [html appendString:@"</head>"];
     
-    [html appendString:@"<body style=\"background:#f6f6f6\">"];
+    [html appendString:@"<body style=\"background:#FFFFFFFF\">"];
     [html appendString:[self getBodyString]];
     [html appendString:@"</body>"];
     [html appendString:@"</html>"];

@@ -14,7 +14,8 @@
 
 @interface HTNewsDetailViewController : UIViewController
 
-@property (nonatomic, weak) WKWebView *webView;
+@property (nonatomic, weak) UITableView *tableView;
+@property (nonatomic, strong) WKWebView *webView;
 @property (nonatomic, strong) NSString *url;
 @property (nonatomic, strong) id<HTDetailEntityDelegate> entity;
 @property (nonatomic, strong) HTNewsDetailsModel *viewModel;

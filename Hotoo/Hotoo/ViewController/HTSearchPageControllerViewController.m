@@ -134,7 +134,7 @@
 - (void)fetchRecentHotWord{
     __weak typeof(self) welf = self;
     [[self.viewModel.fetchHotWordCommand execute:nil] subscribeNext:^(NSArray *x) {
-        __weak typeof(welf) sself = self;
+        __strong typeof(welf) sself = self;
         sself.hotwordArray = x;
         [sself addHotWordInHotWordView];
     } error:^(NSError *error) {

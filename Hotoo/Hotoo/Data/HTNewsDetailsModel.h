@@ -19,7 +19,7 @@
 /**
  *  相似新闻
  */
-@property(nonatomic,strong)NSArray *sameNews;
+@property(nonatomic,strong)NSMutableArray *sameNews;
 /**
  *  搜索关键字
  */
