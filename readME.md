@@ -1,10 +1,11 @@
 # Hotoo
 看了SXNews的工程也参考模仿网易新闻做的新闻软件。<br />
 本人第一次写新闻流app，希望多多指教，目前主要功能包括各类新闻，热搜，以后会在加短视频和更多个性化板块。
+### 3月3日更新
+增加新闻细节页面UIActivityController实现分享
 ### 3月2日更新
 增加新闻细节页面相关新闻的推送，并且重构新闻细节页面的框架，由原来的一整页的WKWebView换成UITableView上分2个section分别放WKWebView和related article cell，今后会再加上分享extension的接口。
 ### 2月29日更新
-
 ###### 1.概括
 基本完成主要新闻类app的功能，包括各类新闻和热搜，主要框架是navigation controller里面包含一个tabbar controller，各类新闻controller被包含在tabbar controller的news模块，通过scroll view拖动或顶部新闻类型tab进行交换，以后会优化初始化加载（目前是全部新闻列表页初始化都加载，很影响性能）。新闻模块提供了3种自定义的cell，通过对数据的解析，来判断改加载到哪种自定义cell中。关于新闻详情页，请求页面返回的数据中既有一个url地址，也有一个xml的字符串，url地址展示后不美观，所以做法是将xml格式的字符串解析并在WKWebView中展示，这其中做到了图文混排并设置了css样式。
 ###### 2.实现

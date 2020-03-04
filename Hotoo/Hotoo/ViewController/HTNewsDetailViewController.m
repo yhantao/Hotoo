@@ -13,6 +13,7 @@
 #import "HTColorUtil.h"
 #import "UIControl+RACSignalSupport.h"
 #import "HTSimilarNewsCell.h"
+#import "HTShareCell.h"
 
 @interface HTNewsDetailViewController () <WKNavigationDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -58,6 +59,10 @@
     self.tableView.frame = CGRectMake(0, 88, self.view.frame.size.width, self.view.frame.size.height - 88);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.bounces = NO;
+//    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
+//    [self.tableView.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:88].active = YES;
+//    [self.tableView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active = YES;
     
     // web view
     WKWebView *webView = [[WKWebView alloc] init];
@@ -101,9 +106,11 @@
             return self.view.frame.size.height - 88;
         }
         return self.webView.scrollView.contentSize.height;
+    }else if(section == 1){
+        return 20;
     }else{
         if(self.viewModel.sameNews.count > 0){
-            return 40;
+            return 20;
         }else{
             return 0;
         }
@@ -114,6 +121,8 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if(section == 0){
         return self.webView;
+    }else if(section == 1){
+        return [UIView new];
     }else{
         UIView *header = [[UIView alloc] init];
         if(self.viewModel.sameNews.count > 0){
@@ -132,6 +141,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section == 0){
         return [UITableViewCell new];
+    }
+    if(indexPath.section == 1){
+        HTShareCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"sharedCell"];
+        if(!cell){
+            cell = [[HTShareCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sharedCell"];
+        }
+        return cell;
     }else{
         HTSimilarNewsCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"simCell"];
         if(!cell){
@@ -144,26 +160,36 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0){
-        return 40;
+        return 0;
+    }else if(indexPath.section == 1){
+        return 120;
     }else{
         return 80;
     }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return 3;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(section == 0){
         return 1;
-    }
-    else{
+    }else if(section == 1){
+        return 1;
+    }else{
         return self.viewModel.sameNews.count;
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section == 1){
+        NSString *title = [NSString stringWithFormat:@"皮皮给爱生气的姐姐分享一则新闻 -- %@",self.viewModel.detailEntity.title];
+        NSURL *url = [NSURL URLWithString:self.url];
+        
+        UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems: @[title, url] applicationActivities:nil];
+        [self presentViewController:activityViewController animated:YES completion:nil];
+    }
+    else if(indexPath.section == 1){
         HTSimilarNewsEntity *model = self.viewModel.sameNews[indexPath.row];
         NSCharacterSet *cset = [NSCharacterSet characterSetWithCharactersInString:@"_"];
         NSRange range = [model.docid rangeOfCharacterFromSet:cset];

@@ -18,6 +18,10 @@
 		D13FC024240AF9270098F45D /* HTSimilarNewsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = D13FC023240AF9270098F45D /* HTSimilarNewsEntity.m */; };
 		D13FC028240B05980098F45D /* HTNewsDetails.css in Resources */ = {isa = PBXBuildFile; fileRef = D13FC027240B05980098F45D /* HTNewsDetails.css */; };
 		D13FC02C240D70BC0098F45D /* HTSimilarNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D13FC02B240D70BC0098F45D /* HTSimilarNewsCell.m */; };
+		D15856A3240EF10400BBBDF9 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D15856A2240EF10400BBBDF9 /* ShareViewController.m */; };
+		D15856A6240EF10400BBBDF9 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D15856A4240EF10400BBBDF9 /* MainInterface.storyboard */; };
+		D15856AA240EF10400BBBDF9 /* HTSharedExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D158569F240EF10400BBBDF9 /* HTSharedExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D15856B1240EF3A100BBBDF9 /* HTShareCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D15856B0240EF3A100BBBDF9 /* HTShareCell.m */; };
 		D17D8CCD23F21FB200490DCF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D17D8CCC23F21FB200490DCF /* AppDelegate.m */; };
 		D17D8CD023F21FB200490DCF /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D17D8CCF23F21FB200490DCF /* SceneDelegate.m */; };
 		D17D8CD323F21FB200490DCF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D17D8CD223F21FB200490DCF /* ViewController.m */; };
@@ -39,6 +43,30 @@
 		D1D614A22405F57C00623C69 /* Launch Screen1.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1D614A12405F57C00623C69 /* Launch Screen1.storyboard */; };
 		D1D614EF2406F26F00623C69 /* HTSearchPageControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D614EE2406F26F00623C69 /* HTSearchPageControllerViewController.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D15856A8240EF10400BBBDF9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D17D8CC023F21FB200490DCF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D158569E240EF10400BBBDF9;
+			remoteInfo = HTSharedExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D15856AB240EF10400BBBDF9 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D15856AA240EF10400BBBDF9 /* HTSharedExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4B266D27E65F4868CE2D3E2B /* Pods-Hotoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hotoo.debug.xcconfig"; path = "Target Support Files/Pods-Hotoo/Pods-Hotoo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -405,6 +433,13 @@
 		D13FC029240B61710098F45D /* HTDetailEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTDetailEntity.h; sourceTree = "<group>"; };
 		D13FC02A240D70BC0098F45D /* HTSimilarNewsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTSimilarNewsCell.h; sourceTree = "<group>"; };
 		D13FC02B240D70BC0098F45D /* HTSimilarNewsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTSimilarNewsCell.m; sourceTree = "<group>"; };
+		D158569F240EF10400BBBDF9 /* HTSharedExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HTSharedExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		D15856A1240EF10400BBBDF9 /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		D15856A2240EF10400BBBDF9 /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
+		D15856A5240EF10400BBBDF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		D15856A7240EF10400BBBDF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D15856AF240EF3A100BBBDF9 /* HTShareCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTShareCell.h; sourceTree = "<group>"; };
+		D15856B0240EF3A100BBBDF9 /* HTShareCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTShareCell.m; sourceTree = "<group>"; };
 		D17D8CC823F21FB200490DCF /* Hotoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hotoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D17D8CCB23F21FB200490DCF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D17D8CCC23F21FB200490DCF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -446,6 +481,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D158569C240EF10400BBBDF9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D17D8CC523F21FB200490DCF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -881,10 +923,22 @@
 			path = Private;
 			sourceTree = "<group>";
 		};
+		D15856A0240EF10400BBBDF9 /* HTSharedExtension */ = {
+			isa = PBXGroup;
+			children = (
+				D15856A1240EF10400BBBDF9 /* ShareViewController.h */,
+				D15856A2240EF10400BBBDF9 /* ShareViewController.m */,
+				D15856A4240EF10400BBBDF9 /* MainInterface.storyboard */,
+				D15856A7240EF10400BBBDF9 /* Info.plist */,
+			);
+			path = HTSharedExtension;
+			sourceTree = "<group>";
+		};
 		D17D8CBF23F21FB200490DCF = {
 			isa = PBXGroup;
 			children = (
 				D17D8CCA23F21FB200490DCF /* Hotoo */,
+				D15856A0240EF10400BBBDF9 /* HTSharedExtension */,
 				D17D8CC923F21FB200490DCF /* Products */,
 				566A5A42B7DA24A9F524ABC3 /* Pods */,
 				789406329EA33EF29EC08A74 /* Frameworks */,
@@ -895,6 +949,7 @@
 			isa = PBXGroup;
 			children = (
 				D17D8CC823F21FB200490DCF /* Hotoo.app */,
+				D158569F240EF10400BBBDF9 /* HTSharedExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -959,6 +1014,8 @@
 				D13FC01724099F900098F45D /* HTNavigationBar.m */,
 				D13FC02A240D70BC0098F45D /* HTSimilarNewsCell.h */,
 				D13FC02B240D70BC0098F45D /* HTSimilarNewsCell.m */,
+				D15856AF240EF3A100BBBDF9 /* HTShareCell.h */,
+				D15856B0240EF3A100BBBDF9 /* HTShareCell.m */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -1014,6 +1071,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D158569E240EF10400BBBDF9 /* HTSharedExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D15856AE240EF10400BBBDF9 /* Build configuration list for PBXNativeTarget "HTSharedExtension" */;
+			buildPhases = (
+				D158569B240EF10400BBBDF9 /* Sources */,
+				D158569C240EF10400BBBDF9 /* Frameworks */,
+				D158569D240EF10400BBBDF9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HTSharedExtension;
+			productName = HTSharedExtension;
+			productReference = D158569F240EF10400BBBDF9 /* HTSharedExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		D17D8CC723F21FB200490DCF /* Hotoo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D17D8CE123F21FB400490DCF /* Build configuration list for PBXNativeTarget "Hotoo" */;
@@ -1023,10 +1097,12 @@
 				D17D8CC523F21FB200490DCF /* Frameworks */,
 				D17D8CC623F21FB200490DCF /* Resources */,
 				FD87755306E8835E7F17683A /* [CP] Embed Pods Frameworks */,
+				D15856AB240EF10400BBBDF9 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D15856A9240EF10400BBBDF9 /* PBXTargetDependency */,
 			);
 			name = Hotoo;
 			productName = Hotoo;
@@ -1042,6 +1118,9 @@
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Hantao Yang";
 				TargetAttributes = {
+					D158569E240EF10400BBBDF9 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
 					D17D8CC723F21FB200490DCF = {
 						CreatedOnToolsVersion = 11.3.1;
 					};
@@ -1061,11 +1140,20 @@
 			projectRoot = "";
 			targets = (
 				D17D8CC723F21FB200490DCF /* Hotoo */,
+				D158569E240EF10400BBBDF9 /* HTSharedExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D158569D240EF10400BBBDF9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D15856A6240EF10400BBBDF9 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D17D8CC623F21FB200490DCF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1122,6 +1210,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D158569B240EF10400BBBDF9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D15856A3240EF10400BBBDF9 /* ShareViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D17D8CC423F21FB200490DCF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1136,6 +1232,7 @@
 				D17D8CCD23F21FB200490DCF /* AppDelegate.m in Sources */,
 				D17D8CDE23F21FB400490DCF /* main.m in Sources */,
 				D13FC01B240A1F290098F45D /* HTNewsDetailsEntity.m in Sources */,
+				D15856B1240EF3A100BBBDF9 /* HTShareCell.m in Sources */,
 				D1D61490240345DB00623C69 /* HTNewsViewController.m in Sources */,
 				D17D8CEE23F2245000490DCF /* HTBarLabel.m in Sources */,
 				D1D614932403751000623C69 /* HTNewsDetailViewController.m in Sources */,
@@ -1157,7 +1254,64 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		D15856A9240EF10400BBBDF9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D158569E240EF10400BBBDF9 /* HTSharedExtension */;
+			targetProxy = D15856A8240EF10400BBBDF9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D15856A4240EF10400BBBDF9 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D15856A5240EF10400BBBDF9 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		D15856AC240EF10400BBBDF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8H62M35NY3;
+				INFOPLIST_FILE = HTSharedExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.hantao.hotoo.HTSharedExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D15856AD240EF10400BBBDF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8H62M35NY3;
+				INFOPLIST_FILE = HTSharedExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.hantao.hotoo.HTSharedExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		D17D8CDF23F21FB400490DCF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1329,6 +1483,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D15856AE240EF10400BBBDF9 /* Build configuration list for PBXNativeTarget "HTSharedExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D15856AC240EF10400BBBDF9 /* Debug */,
+				D15856AD240EF10400BBBDF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D17D8CC323F21FB200490DCF /* Build configuration list for PBXProject "Hotoo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

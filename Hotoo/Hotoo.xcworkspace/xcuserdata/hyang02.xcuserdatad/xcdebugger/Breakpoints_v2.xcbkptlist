@@ -39,97 +39,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CDD3DCE7-917B-488D-9D43-6FDC58DE0DB4"
+            uuid = "D3E3649B-03C8-4C60-A9A7-A4CF08E8BD04"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Hotoo/ViewController/HTNewsDetailViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
+            landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F70549B8-7041-47A9-8E04-2838D6AC22CC"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Hotoo/ViewController/HTNewsDetailViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DACDFCEA-2B59-4E0F-BD80-4F36F15F3BC4"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Hotoo/Data/HTNewsDetailsModel.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "-setupRACCommands"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1B6552B4-FA29-4FDC-8DA9-11D5FBA316B2"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Hotoo/Data/HTNewsDetailsModel.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "-setupRACCommands"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "1B6552B4-FA29-4FDC-8DA9-11D5FBA316B2 - 20bdab736997c420"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__38-[HTNewsDetailsModel setupRACCommands]_block_invoke_3"
-                  moduleName = "Hotoo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hyang02/Documents/ht2/Hotoo/Hotoo/Hotoo/Data/HTNewsDetailsModel.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "385">
-               </Location>
-               <Location
-                  uuid = "1B6552B4-FA29-4FDC-8DA9-11D5FBA316B2 - 20bdab736997c420"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__38-[HTNewsDetailsModel setupRACCommands]_block_invoke_3"
-                  moduleName = "Hotoo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hyang02/Documents/ht2/Hotoo/Hotoo/Hotoo/Data/HTNewsDetailsModel.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "405">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
