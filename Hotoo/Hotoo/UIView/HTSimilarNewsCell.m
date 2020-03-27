@@ -21,7 +21,7 @@
     // Configure the view for the selected state
 }
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier isNotLast:(BOOL)notLast{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self){
         // img
@@ -38,7 +38,7 @@
         UILabel *title = [[UILabel alloc] init];
         title.numberOfLines = 2;
         title.textColor = [UIColor blackColor];
-        title.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:15];
+        title.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
         title.textAlignment = NSTextAlignmentJustified;
         [self.contentView addSubview:title];
         self.title = title;
@@ -54,6 +54,18 @@
         self.ptime = ptime;
         self.ptime.frame = CGRectMake(100, 50, 50, 20);
 
+        // separator
+        if (notLast){
+            UIView *separator = [[UIView alloc] init];
+            separator.backgroundColor = [UIColor lightGrayColor];
+            [self.contentView addSubview:separator];
+            separator.translatesAutoresizingMaskIntoConstraints = NO;
+            [separator.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:10].active = YES;
+            [separator.widthAnchor constraintEqualToConstant:[UIScreen mainScreen].bounds.size.width - 20].active = YES;
+            [separator.topAnchor constraintEqualToAnchor:self.contentView.bottomAnchor constant:-0.4].active = YES;
+            [separator.heightAnchor constraintEqualToConstant:0.4].active = YES;
+            
+        }
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;

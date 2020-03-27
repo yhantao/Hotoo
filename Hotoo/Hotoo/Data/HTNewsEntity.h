@@ -24,6 +24,11 @@
 @property (nonatomic,strong) NSArray *imgextra;
 @property (nonatomic,strong) NSString *docid;
 @property (nonatomic,strong) NSString *boardid;
+@property (nonatomic,strong) NSString *photosetID;
+@property (nonatomic,strong) NSNumber *votecount;
+@property (nonatomic,strong) NSNumber *priority;
+@property (nonatomic,strong) NSNumber *quality;
+
 
 
 

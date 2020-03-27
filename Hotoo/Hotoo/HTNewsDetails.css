@@ -1,11 +1,12 @@
 .title {
     text-align:left;
     font-size:60px;
-    font-weight:200;
-    font-family:"Helvetica Neue";
+    font-weight:600;
+    font-family:"PingFang SC";
     color:black;
     margin-left:40px;
     margin-right:40px;
+    margin-top:40px;
     text-align: center;
 
 }
@@ -13,8 +14,8 @@
 .time {
     text-align:left;
     font-size:30px;
-    font-weight:200;
-    font-family:"Helvetica Neue";
+    font-weight:300;
+    font-family:"PingFang SC";
     color:black;
     margin-top:20px;
     margin-bottom:20px;
@@ -26,8 +27,8 @@
 .paragraph {
     text-align:left;
     font-size:40px;
-    font-weight:200;
-    font-family:"Helvetica Neue";
+    font-weight:400;
+    font-family:"PingFang SC";
     text-align: justify;
     color:black;
     margin-top:px;

@@ -20,9 +20,9 @@
     if(self){
         // label
         UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 25)];
-        lbl.text = @"分享到微信 / 微博领红包";
+        lbl.text = @"分享至微信/微博领红包";
         lbl.textAlignment = NSTextAlignmentCenter;
-        lbl.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:16];
+        lbl.font = [UIFont fontWithName:@"PingFangSC-Regular" size:16];
         [self.contentView addSubview:lbl];
         
         

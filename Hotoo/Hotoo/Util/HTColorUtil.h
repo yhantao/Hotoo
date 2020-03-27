@@ -19,4 +19,5 @@
 + (UIColor *)yellow_ht;
 + (UIColor *)orange_ht;
 + (UIColor *)brown_ht;
++ (UIColor *)blue_ht;
 @end

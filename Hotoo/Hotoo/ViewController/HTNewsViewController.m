@@ -13,21 +13,27 @@
 #import "HTNewsDetailViewController.h"
 #import "HTHeadNewsCell.h"
 #import "HTImagesNewsCell.h"
-#import "MJRefresh.h"
 #import "HTColorUtil.h"
+#import "HTImageZoomingManager.h"
+#import "UIScrollView+MJRefresh.h"
+
+@import MJRefresh;
 
 
 
 @interface HTNewsViewController ()
 
-@property (nonatomic, strong) NSMutableArray *newsList;
 @property (nonatomic, strong) dispatch_queue_t queue1;
-@property (nonatomic, assign) BOOL isRefreshing;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (nonatomic, strong) NSDate *lastRefresh;
+@property (nonatomic, weak) UIImageView *loadingView;
 
 @end
 
-@implementation HTNewsViewController
+@implementation HTNewsViewController{
+    NSTimer *_timer;
+    NSInteger _loadingcnt;
+}
 
 - (instancetype)initWithIndex:(HTNewsType)index{
     self = [super init];
@@ -41,59 +47,93 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [self.view addSubview:imageView];
+    self.loadingView = imageView;
+    self.loadingView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.loadingView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [self.loadingView.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:10].active = YES;
+    [self.loadingView setImage:[UIImage imageNamed:@"preloader-1"]];
+    
+    // timer for loading animation
+    _loadingcnt = 1;
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        self->_loadingcnt ++;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.loadingView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"preloader-%@", @((self->_loadingcnt - 1) % 12 + 1)]]];
+            if(self.newsList && self.newsList.count > 0 && self->_loadingcnt >= 20){
+                [timer invalidate];
+                [self.loadingView setHidden:YES];
+                [self.tableView setAlpha:0];
+                [self.tableView setHidden:NO];
+                [UIView animateWithDuration:0.5 animations:^{
+                    [self.tableView setAlpha:1.0];
+                }];
+            }
+        });
+    }];
+    [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+    
+    
+    // table view
     UITableView *tableView = [[UITableView alloc] init];
     [self.view addSubview:tableView];
-//    UITabBarController *tabBarVC = [[UITabBarController alloc] init];
-//    CGFloat tabBarHeight = tabBarVC.tabBar.frame.size.height;
     tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
 
     // MJ Refresh
     MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(handleMJRefresh:)];
+    NSMutableArray *imgTmpArr = [NSMutableArray array];
+    for(int i = 1; i <= 12; i++){
+        UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"preloader-%d",i]];
+        [imgTmpArr addObject:img];
+    }
 
-    
-//    NSArray *pullingImages = @[@"dog1", @"dog2", @"dog3"];
-//    [header setImages:pullingImages forState:MJRefreshStatePulling];
-    UIImage *img1 = [UIImage imageNamed:@"dogwalk1"];
-    UIImage *img2 = [UIImage imageNamed:@"dogwalk2"];
-    UIImage *img3 = [UIImage imageNamed:@"dogwalk3"];
-    NSArray *refreshingImages = @[img1, img2, img3];
+    NSArray *refreshingImages = [imgTmpArr copy];
     [header setImages:refreshingImages forState:MJRefreshStateRefreshing];
-    NSArray *pullingImagesImages = @[img1, img2, img3];
+    NSArray *pullingImagesImages = [imgTmpArr copy];
     [header setImages:pullingImagesImages forState:MJRefreshStatePulling];
+
+    header.backgroundColor = [UIColor whiteColor];
+    [header setTitle:@"努力加载中..." forState:MJRefreshStateRefreshing];
+    [header setTitle:@"" forState:MJRefreshStateIdle];
+    [header setTitle:@"努力加载中..." forState:MJRefreshStatePulling];
+    [header setTitle:@"努力加载中..." forState:MJRefreshStateWillRefresh];
 
     [header.lastUpdatedTimeLabel setHidden:YES];
     [header.stateLabel setHidden:YES];
-
-    header.backgroundColor = [UIColor whiteColor];
-    [header setTitle:@"正在很努力加载中" forState:MJRefreshStateRefreshing];
-    [header setTitle:@"" forState:MJRefreshStateIdle];
-    [header setTitle:@"正在很努力加载中" forState:MJRefreshStatePulling];
-    [header setTitle:@"正在很努力加载中" forState:MJRefreshStateWillRefresh];
+    [header.gifView setHidden:NO];
     tableView.mj_header = header;
 
+    // add refresh control
+//    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+//    [refreshControl addTarget:self action:@selector(handleMJRefresh:) forControlEvents:UIControlEventValueChanged];
+//    tableView.refreshControl = refreshControl;
+//    self.refreshControl = refreshControl;
     self.tableView = tableView;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView setHidden:YES];
+    [self.tableView setAlpha:0];
     
-    // UI Refresh
-//    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-//    [refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
-//    tableView.refreshControl = refreshControl;
-//    self.refreshControl = refreshControl;
 }
 
-- (void)handleMJRefresh:(MJRefreshGifHeader *)sender{
+- (void)handleMJRefresh:(MJRefreshStateHeader *)sender{
+    self.isRefreshing = YES;
     dispatch_async(self.queue1, ^{
         [[DataManager sharedInstance] loadNewsDataWithBlock:^(BOOL success, NSArray *lists){
             [self.newsList removeAllObjects];
             [self.newsList addObjectsFromArray:lists];
+            self.lastRefresh = [NSDate date];
             dispatch_async(dispatch_get_main_queue(), ^{
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [self.tableView reloadData];
+                    if(self.newsList && self.newsList.count > 0){
+                        [self.tableView reloadData];
+                    }
                     [self.tableView.mj_header endRefreshing];
+                    self.isRefreshing = NO;
                 });
-                [self saveDataToDisk:self.newsList];
+                // [self saveDataToDisk:self.newsList];
             });
         } withIndex:self.index reset:YES];
     });
@@ -104,26 +144,44 @@
     if (self.newsList){
         return;
     }
+    self.isRefreshing = YES;
     dispatch_async(self.queue1, ^{
         [[DataManager sharedInstance] loadNewsDataWithBlock:^(BOOL success, NSArray *lists){
             self.newsList = [lists mutableCopy];
+            self.lastRefresh = [NSDate date];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
-                 [self.tableView setHidden:NO];
-                [self saveDataToDisk:self.newsList];
+                [UIView animateWithDuration:0.5 animations:^{
+                    [self.tableView setAlpha:1.0];
+                } completion:^(BOOL finished){
+                    self.isRefreshing = NO;
+                }];
+                // [self saveDataToDisk:self.newsList];
             });
         } withIndex:self.index];
     });
 }
-
+- (void) scrollToRefreshTable{
+    if (_lastRefresh && ABS([_lastRefresh timeIntervalSinceNow]) <= 600){
+        if(self.newsList && self.newsList.count > 0){
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        }
+        return;
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView.mj_header beginRefreshing];
+    });
+}
 - (void) preloadData{
     self.isRefreshing = YES;
     dispatch_async(self.queue1, ^{
         [[DataManager sharedInstance] loadNewsDataWithBlock:^(BOOL success, NSArray *lists){
+            self.lastRefresh = [NSDate date];
             [self.newsList addObjectsFromArray:[lists copy]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
-                [self saveDataToDisk:self.newsList];
+                // [self saveDataToDisk:self.newsList];
                 self.isRefreshing = NO;
             });
         } withIndex:self.index];
@@ -162,33 +220,33 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     HTNewsEntity *entity = self.newsList[indexPath.row];
-    // 1. head news cell
-    if (entity.imgType &&  [entity.imgType intValue] == 1){
-        HTHeadNewsCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"headNewsCell"];
-        if(!cell){
-            cell = [[HTHeadNewsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"headNewsCell"];
-        }
-        [cell layoutCellWithModel:self.newsList[indexPath.row]];
-        // preload data when less than 10 cells need to be shown
-        if (!self.isRefreshing && indexPath.row - self.newsList.count >= -5){
-            [self preloadData];
-        }
-        return cell;
-    }
-    // 2. head news cell
-    else if (entity.imgextra && entity.imgextra.count == 2){
+//    // 1. head news cell
+//    if (entity.imgType &&  [entity.imgType intValue] == 1){
+//        HTHeadNewsCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"headNewsCell"];
+//        if(!cell){
+//            cell = [[HTHeadNewsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"headNewsCell"];
+//        }
+//        [cell layoutCellWithModel:self.newsList[indexPath.row]];
+//        // preload data when less than 10 cells need to be shown
+//        if (!self.isRefreshing && indexPath.row - self.newsList.count == -5){
+//            [self preloadData];
+//        }
+//        return cell;
+//    }
+    // 1. img news cell
+    if (entity.imgextra && entity.imgextra.count == 2){
         HTImagesNewsCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"imgNewsCell"];
         if(!cell){
             cell = [[HTImagesNewsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"imgNewsCell"];
         }
         [cell layoutCellWithModel:self.newsList[indexPath.row]];
         // preload data when less than 10 cells need to be shown
-        if (!self.isRefreshing && indexPath.row - self.newsList.count >= -5){
+        if (!self.isRefreshing && indexPath.row - self.newsList.count == -5){
             [self preloadData];
         }
         return cell;
     }
-    // 3. normal news cell
+    // 2. normal news cell
     else{
         HTNewsCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"newsCell"];
         if(!cell){
@@ -196,7 +254,7 @@
         }
         [cell layoutCellWithModel:self.newsList[indexPath.row]];
         // preload data when less than 10 cells need to be shown
-        if (!self.isRefreshing && indexPath.row - self.newsList.count >= -5){
+        if (!self.isRefreshing && indexPath.row - self.newsList.count == -5){
             [self preloadData];
         }
         return cell;
@@ -211,17 +269,17 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     HTNewsEntity *entity = self.newsList[indexPath.row];
-    // 1. head news cell
-    if (entity.imgType &&  [entity.imgType intValue] == 1){
-        return 270;
-    }
-    // 2. images news cell
-    else if (entity.imgextra && entity.imgextra.count == 2){
-        return 160;
+//    // 1. head news cell
+//    if (entity.imgType &&  [entity.imgType intValue] == 1){
+//        return 270;
+//    }
+    // 1. images news cell
+    if (entity.imgextra && entity.imgextra.count == 2){
+        return 165;
     }
     // 3. normal news cell
     else{
-        return 80;
+        return 110;
     }
 }
 
@@ -231,9 +289,14 @@
     NSRange range = [model.docid rangeOfCharacterFromSet:cset];
     if (range.location != NSNotFound) {
         return;
+    }else{
+        HTNewsDetailViewController *detailView = [[HTNewsDetailViewController alloc] initWithURL:model.url withEntity:model];
+        [self showViewController:detailView sender:self];
     }
-    HTNewsDetailViewController *detailView = [[HTNewsDetailViewController alloc] initWithURL:model.url withEntity:model];
-    [self showViewController:detailView sender:self];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 @end

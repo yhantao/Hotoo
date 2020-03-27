@@ -39,7 +39,7 @@
         [self.label.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-10].active = YES;
         [self.label.topAnchor constraintEqualToAnchor:self.contentView.topAnchor constant:20].active = YES;
         
-        [self.label setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:15]];
+        [self.label setFont:[UIFont fontWithName:@"PingFangSC-Regular" size:16]];
         self.label.numberOfLines = 0;
         
         // ptime
@@ -48,7 +48,6 @@
         self.timeLabel = timeLabel;
         self.timeLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self.timeLabel.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:10].active = YES;
-        [self.timeLabel.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-10].active = YES;
         [self.timeLabel.topAnchor constraintEqualToAnchor:self.label.bottomAnchor constant:10].active = YES;
         [self.timeLabel.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor constant:-20].active = YES;
         [self.timeLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:12]];

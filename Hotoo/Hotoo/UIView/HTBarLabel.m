@@ -16,7 +16,7 @@
     self = [super initWithFrame:frame];
     if (self){
         self.textAlignment = NSTextAlignmentCenter;
-        self.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:20];
+        self.font = [UIFont fontWithName:@"PingFangSC-Regular" size:22];
         self.scale = 0.0;
     }
     return self;
@@ -27,7 +27,7 @@
     if (scale == 0){
         self.textColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1];
     }else{
-        self.textColor = [UIColor brown_ht];
+        self.textColor = [UIColor orange_ht];
     }
 
     CGFloat minScale = 0.8;

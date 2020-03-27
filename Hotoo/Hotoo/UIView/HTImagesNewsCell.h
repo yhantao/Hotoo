@@ -18,6 +18,8 @@
 @property (nonatomic, weak) UILabel *src;
 @property (nonatomic, weak) UILabel *replyCount;
 @property (nonatomic, weak) UILabel *ptime;
+@property (nonatomic, weak) UILabel *priorityLabel;
+@property (nonatomic, weak) UILabel *qualityLabel;
 
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;

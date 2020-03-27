@@ -17,6 +17,11 @@
 @property(nonatomic, assign) int start_3;
 @property(nonatomic, assign) int start_4;
 @property(nonatomic, assign) int start_5;
+@property(nonatomic, assign) int start_6;
+@property(nonatomic, assign) int start_7;
+@property(nonatomic, assign) int start_8;
+@property(nonatomic, assign) int start_9;
+@property(nonatomic, assign) int start_10;
 
 @end
 
@@ -39,6 +44,11 @@
         _start_3 = 0;
         _start_4 = 0;
         _start_5 = 0;
+        _start_6 = 0;
+        _start_7 = 0;
+        _start_8 = 0;
+        _start_9 = 0;
+        _start_10 = 0;
     }
     return self;
 }
@@ -57,8 +67,25 @@
             case HTNewsTypeEntertainment:
                 self.start_4 = 0;
                 break;
-            default:
+            case HTNewsTypeEconomy:
                 self.start_5 = 0;
+                break;
+            case HTNewsTypeGame:
+                self.start_6 = 0;
+                break;
+            case HTNewsTypeTravel:
+                self.start_7 = 0;
+                break;
+            case HTNewsTypeMovie:
+                self.start_8 = 0;
+                break;
+            case HTNewsTypeFasion:
+                self.start_9 = 0;
+                break;
+            case HTNewsTypeHistory:
+                self.start_10 = 0;
+                break;
+            default:
                 break;
         }
     }
@@ -66,8 +93,8 @@
 }
 - (void)loadNewsDataWithBlock:(newsDataCallBack)block withIndex:(HTNewsType)index{
     dispatch_async(self.queue, ^{
-        NSString *baseUrlString = @"http://c.m.163.com/nc/article/headline/T1348647853363/";
-        NSString *urlString = [NSString stringWithFormat:@"%@%d-20.html",baseUrlString,self.start_1];
+        NSString *baseUrlString;
+        NSString *urlString;
         switch (index) {
             case HTNewsTypeGeneral:
                 baseUrlString = @"http://c.m.163.com/nc/article/headline/T1348647853363/";
@@ -85,9 +112,31 @@
                 baseUrlString = @"http://c.3g.163.com/nc/article/list/T1348648517839/";
                 urlString = [NSString stringWithFormat:@"%@%d-20.html",baseUrlString,self.start_4];
                 break;
-            default:
-                baseUrlString = @"http://c.m.163.com/nc/auto/list/5bmz6aG25bGx/";
+            case HTNewsTypeEconomy:
+                baseUrlString = @"http://c.m.163.com/nc/article/list/T1348648756099/";
                 urlString = [NSString stringWithFormat:@"%@%d-20.html",baseUrlString,self.start_5];
+                break;
+            case HTNewsTypeGame:
+                baseUrlString = @"http://c.m.163.com/nc/article/list/T1348654151579/";
+                urlString = [NSString stringWithFormat:@"%@%d-20.html",baseUrlString,self.start_6];
+                break;
+            case HTNewsTypeTravel:
+                baseUrlString = @"http://c.m.163.com/nc/article/list/T1348654204705/";
+                urlString = [NSString stringWithFormat:@"%@%d-20.html",baseUrlString,self.start_7];
+                break;
+            case HTNewsTypeMovie:
+                baseUrlString = @"http://c.m.163.com/nc/article/list/T1348648650048/";
+                urlString = [NSString stringWithFormat:@"%@%d-20.html",baseUrlString,self.start_8];
+                break;
+            case HTNewsTypeFasion:
+                baseUrlString = @"http://c.m.163.com/nc/article/list/T1348650593803/";
+                urlString = [NSString stringWithFormat:@"%@%d-20.html",baseUrlString,self.start_9];
+                break;
+            case HTNewsTypeHistory:
+                baseUrlString = @"http://c.m.163.com/nc/article/list/T1368497029546/";
+                urlString = [NSString stringWithFormat:@"%@%d-20.html",baseUrlString,self.start_10];
+                break;
+            default:
                 break;
         }
         NSURL *url = [[NSURL alloc] initWithString:urlString];
@@ -104,23 +153,45 @@
                         switch (index) {
                             case HTNewsTypeGeneral:
                                 newsList = [dict objectForKey:@"T1348647853363"];
-                                self.start_1 += 21;
+                                self.start_1 += 20;
                                 break;
                             case HTNewsTypeRefined:
-                                newsList = dict[@"T1467284926140"];
-                                self.start_2 += 21;
+                                newsList = [dict objectForKey:@"T1467284926140"];
+                                self.start_2 += 20;
                                 break;
                             case HTNewsTypeSport:
                                 newsList = [dict objectForKey:@"T1348649079062"];
-                                self.start_3 += 21;
+                                self.start_3 += 20;
                                 break;
                             case HTNewsTypeEntertainment:
                                 newsList = [dict objectForKey:@"T1348648517839"];
-                                self.start_4 += 21;
+                                self.start_4 += 20;
+                                break;
+                            case HTNewsTypeEconomy:
+                                newsList = [dict objectForKey:@"T1348648756099"];
+                                self.start_5 += 20;
+                                break;
+                            case HTNewsTypeGame:
+                                newsList = [dict objectForKey:@"T1348654151579"];
+                                self.start_6 += 20;
+                                break;
+                            case HTNewsTypeTravel:
+                                newsList = [dict objectForKey:@"T1348654204705"];
+                                self.start_7 += 20;
+                                break;
+                            case HTNewsTypeMovie:
+                                newsList = [dict objectForKey:@"T1348648650048"];
+                                self.start_8 += 20;
+                                break;
+                            case HTNewsTypeFasion:
+                                newsList = [dict objectForKey:@"T1348650593803"];
+                                self.start_9 += 20;
+                                break;
+                            case HTNewsTypeHistory:
+                                newsList = [dict objectForKey:@"T1368497029546"];
+                                self.start_10 += 20;
                                 break;
                             default:
-                                newsList = [dict objectForKey:@"list"];
-                                self.start_5 += 21;
                                 break;
                         }
                         if (newsList && newsList.count > 0){
@@ -196,6 +267,30 @@
             if(!error){
                 NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                 block(YES, dict);
+            }else{
+                block(NO, nil);
+            }
+        }];
+        [task resume];
+    });
+}
+
+- (void)fetfhPhotosetWithId:(NSString *)photoSetID block:(photoSetCallBack)block{
+    dispatch_async(self.queue, ^{
+        NSString *param1 = [[photoSetID substringFromIndex:4] componentsSeparatedByString: @"|"][0];
+        NSString *param2 = [[photoSetID substringFromIndex:4] componentsSeparatedByString: @"|"][1];
+        NSString *baseURL = [NSString stringWithFormat:@"http://c.m.163.com/photo/api/set/%@/%@.json", param1, param2];
+        NSURL *url = [[NSURL alloc] initWithString:baseURL];
+        NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+        NSURLSession *session = [NSURLSession sharedSession];
+        NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            if(!error){
+                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                if(dict){
+                    NSArray *arr = dict[@"photos"];
+                    block(YES, arr);
+                }
+                block(YES, nil);
             }else{
                 block(NO, nil);
             }

@@ -9,6 +9,14 @@
 #import "HTImagesNewsCell.h"
 #import "HTNewsEntity.h"
 #import "SDWebImage.h"
+#import "HTImageZoomingManager.h"
+#import "HTColorUtil.h"
+
+@interface HTImagesNewsCell()
+
+@property (nonatomic, strong) HTImageZoomingManager *manager;
+
+@end
 
 @implementation HTImagesNewsCell
 
@@ -56,11 +64,12 @@
         self.img3.contentMode = UIViewContentModeScaleAspectFill;
         self.img3.clipsToBounds = YES;
         
+        
         // title
         UILabel *title = [[UILabel alloc] init];
         title.numberOfLines = 1;
         title.textColor = [UIColor blackColor];
-        title.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:14];
+        title.font = [UIFont fontWithName:@"PingFangSC-Regular" size:16];
         title.textAlignment = NSTextAlignmentJustified;
         [self.contentView addSubview:title];
         self.title = title;
@@ -68,8 +77,8 @@
         
         // src
         UILabel *src = [[UILabel alloc] init];
-        src.textColor = [UIColor blackColor];
-        src.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:11];
+        src.textColor = [UIColor lightGrayColor];
+        src.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
         src.textAlignment = NSTextAlignmentLeft;
         [self.contentView addSubview:src];
         self.src = src;
@@ -78,7 +87,7 @@
         // replyCount
         UILabel *replyCount = [[UILabel alloc] init];
         replyCount.textColor = [UIColor blackColor];
-        replyCount.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:11];
+        replyCount.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:12];
         replyCount.textAlignment = NSTextAlignmentLeft;
         [self.contentView addSubview:replyCount];
         self.replyCount = replyCount;
@@ -87,7 +96,7 @@
         // ptime
         UILabel *ptime = [[UILabel alloc] init];
         ptime.textColor = [UIColor blackColor];
-        ptime.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:11];
+        ptime.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:12];
         ptime.textAlignment = NSTextAlignmentLeft;
         [self.contentView addSubview:ptime];
         self.ptime = ptime;
@@ -99,6 +108,28 @@
 }
 
 - (void)layoutCellWithModel:(HTNewsEntity *)model{
+    
+    // manager photo set id
+    if(model.photosetID && model.photosetID.length > 0){
+        NSCharacterSet *cset = [NSCharacterSet characterSetWithCharactersInString:@"_"];
+        NSRange range = [model.docid rangeOfCharacterFromSet:cset];
+        if (range.location != NSNotFound) {
+            // gesture
+            self.manager = [[HTImageZoomingManager alloc] initWithPhotoSetID:model.photosetID];
+            self.img1.userInteractionEnabled = YES;
+            UITapGestureRecognizer *gesture1 = [[UITapGestureRecognizer alloc] initWithTarget: self.manager action:@selector(viewTapped:)];
+            [self.img1 addGestureRecognizer:gesture1];
+            
+            self.img2.userInteractionEnabled = YES;
+            UITapGestureRecognizer *gesture2 = [[UITapGestureRecognizer alloc] initWithTarget: self.manager action:@selector(viewTapped:)];
+            [self.img2 addGestureRecognizer:gesture2];
+            
+            self.img3.userInteractionEnabled = YES;
+            UITapGestureRecognizer *gesture3 = [[UITapGestureRecognizer alloc] initWithTarget: self.manager action:@selector(viewTapped:)];
+            [self.img3 addGestureRecognizer:gesture3];
+        }
+    }
+    
     // title
     self.title.text = model.title;
     
@@ -116,22 +147,96 @@
     }];
     
     // src
-    self.src.text = model.source;
+    self.src.text = (!model.source || model.source.length == 0) ? @"Hotoo新闻" : model.source;
     [self.src sizeToFit];
     self.src.translatesAutoresizingMaskIntoConstraints = NO;
     [self.src.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor constant:-10].active = YES;
     [self.src.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:10].active = YES;
     
+    // priority
+    if([model.replyCount intValue] >= 1000 && [model.votecount intValue] >= 1000){
+        UILabel *priority = [[UILabel alloc] init];
+        priority.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
+        priority.textAlignment = NSTextAlignmentLeft;
+        [self.contentView addSubview:priority];
+        self.priorityLabel = priority;
+        self.priorityLabel.frame = CGRectMake(100, 140, 100, 15);
+        [self.priorityLabel setText:@" 爆 "];
+        [self.priorityLabel setTextColor:[UIColor whiteColor]];
+        self.priorityLabel.backgroundColor = [UIColor orangeColor];
+        self.priorityLabel.clipsToBounds = YES;
+        self.priorityLabel.layer.borderColor = [UIColor orangeColor].CGColor;
+        self.priorityLabel.layer.cornerRadius = 3.0f;
+        self.priorityLabel.layer.borderWidth = 0.5f;
+        [self.priorityLabel setHidden:NO];
+        self.priorityLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.priorityLabel.leadingAnchor constraintEqualToAnchor:self.src.trailingAnchor constant:5].active = YES;
+        [self.priorityLabel.centerYAnchor constraintEqualToAnchor:self.src.centerYAnchor].active = YES;
+    }
+    else if ([model.replyCount intValue] >= 10 && [model.votecount intValue] >= 10){
+        UILabel *priority = [[UILabel alloc] init];
+        priority.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
+        priority.textAlignment = NSTextAlignmentLeft;
+        [self.contentView addSubview:priority];
+        self.priorityLabel = priority;
+        self.priorityLabel.frame = CGRectMake(100, 140, 100, 15);
+        [self.priorityLabel setText:@" 热 "];
+        [self.priorityLabel setTextColor:[UIColor redColor]];
+        self.priorityLabel.backgroundColor = [UIColor whiteColor];
+        self.priorityLabel.layer.borderColor = [UIColor redColor].CGColor;
+        self.priorityLabel.layer.cornerRadius = 3.0f;
+        self.priorityLabel.layer.borderWidth = 0.5f;
+        [self.priorityLabel setHidden:NO];
+        self.priorityLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.priorityLabel.leadingAnchor constraintEqualToAnchor:self.src.trailingAnchor constant:5].active = YES;
+        [self.priorityLabel.centerYAnchor constraintEqualToAnchor:self.src.centerYAnchor].active = YES;
+    }
+    
+    // quality
+    if ([model.quality intValue] >= 80){
+        UILabel *qualityLabel = [[UILabel alloc] init];
+        qualityLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
+        qualityLabel.textAlignment = NSTextAlignmentLeft;
+        [self.contentView addSubview:qualityLabel];
+        self.qualityLabel = qualityLabel;
+        self.qualityLabel.frame = CGRectMake(150, 140, 100, 15);
+        [self.qualityLabel setText:@" 精选 "];
+        [self.qualityLabel setTextColor:[UIColor blue_ht]];
+        self.qualityLabel.backgroundColor = [UIColor whiteColor];
+        self.qualityLabel.layer.borderColor = [UIColor blue_ht].CGColor;
+        self.qualityLabel.layer.cornerRadius = 3.0f;
+        self.qualityLabel.layer.borderWidth = 0.5f;
+        [self.qualityLabel setHidden:NO];
+        self.qualityLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        if(!self.priorityLabel){
+            [self.qualityLabel.leadingAnchor constraintEqualToAnchor:self.src.trailingAnchor constant:5].active = YES;
+        }else{
+            [self.qualityLabel.leadingAnchor constraintEqualToAnchor:self.priorityLabel.trailingAnchor constant:2].active = YES;
+        }
+        [self.qualityLabel.centerYAnchor constraintEqualToAnchor:self.src.centerYAnchor].active = YES;
+    }
+    
     // reply count
-    self.replyCount.text = [NSString stringWithFormat:@"  %@ 跟帖  ", model.replyCount];
-    self.replyCount.frame = CGRectMake(self.src.frame.origin.x + self.src.frame.size.width + 10, 50, 100, 20);
+    NSString *replyCountText;
+    if([model.replyCount intValue] > 10000){
+        replyCountText = [NSString stringWithFormat:@"%.1f 万跟帖", [model.replyCount intValue] / 10000.0];
+    }else{
+        replyCountText = [NSString stringWithFormat:@"%@ 跟帖", model.replyCount];;
+    }
+    self.replyCount.text = replyCountText;
+    self.replyCount.frame = CGRectMake(self.qualityLabel.frame.origin.x + self.qualityLabel.frame.size.width + 10, 50, 100, 20);
     [self.replyCount sizeToFit];
-    self.replyCount.layer.cornerRadius = 5.0f;
-    self.replyCount.layer.borderColor = [UIColor grayColor].CGColor;
-    self.replyCount.layer.borderWidth = 0.2f;
     self.replyCount.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.replyCount.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor constant:-10].active = YES;
-    [self.replyCount.leadingAnchor constraintEqualToAnchor:self.src.trailingAnchor constant:10].active = YES;
+    [self.replyCount.centerYAnchor constraintEqualToAnchor:self.src.centerYAnchor].active = YES;
+    if(self.qualityLabel){
+        [self.replyCount.leadingAnchor constraintEqualToAnchor:self.qualityLabel.trailingAnchor constant:10].active = YES;
+    }
+    else if(self.priorityLabel){
+        [self.replyCount.leadingAnchor constraintEqualToAnchor:self.priorityLabel.trailingAnchor constant:10].active = YES;
+    }
+    else{
+        [self.replyCount.leadingAnchor constraintEqualToAnchor:self.src.trailingAnchor constant:10].active = YES;
+    }
     
     // ptime
     self.ptime.text = model.ptime;
@@ -139,7 +244,7 @@
     [self.ptime sizeToFit];
     self.ptime.translatesAutoresizingMaskIntoConstraints = NO;
     [self.ptime.trailingAnchor constraintEqualToAnchor:self.title.trailingAnchor].active = YES;
-    [self.ptime.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor constant:-10].active = YES;
+    [self.ptime.centerYAnchor constraintEqualToAnchor:self.src.centerYAnchor].active = YES;
 }
 
 -(void)prepareForReuse{
@@ -147,6 +252,22 @@
     self.img1.image = [UIImage imageNamed:@"placeholder-img"];
     self.img2.image = [UIImage imageNamed:@"placeholder-img"];
     self.img3.image = [UIImage imageNamed:@"placeholder-img"];
+    [self.qualityLabel removeFromSuperview];
+    self.qualityLabel = nil;
+    [self.priorityLabel removeFromSuperview];
+    self.priorityLabel = nil;
+    if (self.img1.gestureRecognizers.count > 0){
+        UITapGestureRecognizer *gesture1 = self.img1.gestureRecognizers[0];
+        [self.img1 removeGestureRecognizer:gesture1];
+    }
+    if (self.img2.gestureRecognizers.count > 0){
+        UITapGestureRecognizer *gesture2 = self.img2.gestureRecognizers[0];
+        [self.img2 removeGestureRecognizer:gesture2];
+    }
+    if (self.img3.gestureRecognizers.count > 0){
+        UITapGestureRecognizer *gesture3 = self.img3.gestureRecognizers[0];
+        [self.img3 removeGestureRecognizer:gesture3];
+    }
 }
 
 @end

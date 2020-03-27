@@ -14,8 +14,11 @@
 
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic, assign) HTNewsType index;
+@property (nonatomic, assign) BOOL isRefreshing;
+@property (nonatomic, strong) NSMutableArray *newsList;
 
 - (instancetype) initWithIndex:(HTNewsType)index;
+- (void)scrollToRefreshTable;
 
 @end
 

@@ -9,12 +9,16 @@
 #import "NewsViewController.h"
 #import "HTNewsViewController.h"
 #import "DataManager.h"
+#import "HTColorUtil.h"
 
 @interface NewsViewController ()
 
 @property (nonatomic, strong) NSArray *lblTexts;
 @property (nonatomic, assign) NSInteger index;
-
+@property (nonatomic, strong) HTNewsViewController *currentNewsController;
+@property (nonatomic, strong) NSMutableDictionary *map;
+@property (nonatomic, weak) UIScrollView *scrollBar;
+@property (nonatomic, weak) UIView *segment;
 
 @end
 
@@ -24,7 +28,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    UIStackView *stackView = [[UIStackView alloc] initWithFrame:CGRectMake(5, 100, self.view.frame.size.width - 10, 40)];
+    // init vc map
+    self.map = [NSMutableDictionary dictionary];
+    
+    UIStackView *stackView = [[UIStackView alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 40)];
     [stackView setDistribution:UIStackViewDistributionFillProportionally];
     [stackView setAxis:UILayoutConstraintAxisHorizontal];
     
@@ -47,26 +54,56 @@
     }
     [self.view addSubview:stackView];
     self.stv = stackView;
+    self.stv.backgroundColor = [UIColor colorWithRed:0.98 green:0.98 blue:0.98 alpha:1];
+    
+    // scroll bar
+    UIScrollView *scrollBar = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 140, self.view.frame.size.width, 2)];
+    [self.view addSubview:scrollBar];
+    self.scrollBar = scrollBar;
+    self.scrollBar.backgroundColor = [UIColor colorWithRed:0.98 green:0.98 blue:0.98 alpha:1];
+    UIView *segment = [[UIView alloc] initWithFrame:CGRectMake(10, 0, [UIScreen mainScreen].bounds.size.width / 5 - 20, 2)];
+    segment.backgroundColor = [UIColor orange_ht];
+    segment.layer.cornerRadius = 0.5f;
+    [self.scrollBar addSubview:segment];
+    self.segment = segment;
     
     // add scroll view
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 140, self.view.frame.size.width, self.view.frame.size.height - 140)];
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 142, self.view.frame.size.width, self.view.frame.size.height - 142)];
     scrollView.pagingEnabled = YES;
     scrollView.showsVerticalScrollIndicator = NO;
     scrollView.showsHorizontalScrollIndicator = NO;
     scrollView.bounces = NO;
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width * 5, scrollView.frame.size.height);
-    for (int i = 4; i >= 0; i--){
-        CGFloat width = self.view.frame.size.width;
-        CGFloat offsetX = i * width;
-        
-        HTNewsViewController *vc = [[HTNewsViewController alloc] initWithIndex:(HTNewsType)i];
-        [scrollView addSubview:vc.view];
-        vc.view.frame = CGRectMake(offsetX, 0, width, scrollView.frame.size.height);
-        [self addChildViewController:vc];
-    }
     scrollView.delegate = self;
     [self.view addSubview:scrollView];
     self.scv = scrollView;
+    [self addNewsControllerIfNotPresent:0];
+}
+
+- (HTNewsViewController *)addNewsControllerIfNotPresent:(NSInteger)index{
+    if (!self.map[@(index)]){
+        CGFloat width = self.view.frame.size.width;
+        CGFloat offsetX = index * width;
+        
+        HTNewsViewController *vc = [[HTNewsViewController alloc] initWithIndex:(HTNewsType)index];
+        [self.scv addSubview:vc.view];
+        vc.view.frame = CGRectMake(offsetX, 0, width, self.scv.frame.size.height);
+        [self addChildViewController:vc];
+        self.currentNewsController = vc;
+        self.map[@(index)] = vc;
+        return vc;
+    }
+    else{
+        return self.map[@(index)];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if(self.currentNewsController && self.currentNewsController.newsList){
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        [self.currentNewsController.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
 }
 
 - (NSArray *)lblTexts{
@@ -74,12 +111,6 @@
         _lblTexts = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"NewsURLs" ofType:@"plist"]];
     }
     return _lblTexts;
-}
-
-#pragma mark - Delegate
-
-- (void) changeLabelFrom:(NSInteger)from to:(NSInteger)to{
-    
 }
 
 #pragma mark - Target / Action
@@ -92,24 +123,54 @@
         }
         currentLbl.scale = 1.0;
         self.index = currentLbl.tag;
-        self.scv.contentOffset = CGPointMake(currentLbl.tag * self.view.frame.size.width, 0);
+        CGRect frame = self.segment.frame;
+        frame.origin.x = [UIScreen mainScreen].bounds.size.width / 5 * self.index + 10;
+        self.segment.frame = frame;
+        self.scv.contentOffset = CGPointMake(currentLbl.tag * [UIScreen mainScreen].bounds.size.width, 0);
+        self.currentNewsController.isRefreshing = NO;
+        HTNewsViewController *newsController = [self addNewsControllerIfNotPresent:self.index];
+        self.currentNewsController = newsController;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if(!newsController.isRefreshing){
+                [newsController scrollToRefreshTable];
+            }
+        });
     }];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     CGFloat offsetX = scrollView.contentOffset.x;
-    if (offsetX == self.index){
+    NSInteger currentIndex = offsetX / [UIScreen mainScreen].bounds.size.width;
+    if (currentIndex == self.index){
         return;
     }
-    self.index = offsetX;
-    NSInteger index = offsetX / (self.view.frame.size.width);
-    [UIView animateWithDuration:0.3 animations:^{
+    self.index = currentIndex;
+    [UIView animateWithDuration:0.6 animations:^{
         for (HTBarLabel *lbl in self.stv.arrangedSubviews){
             lbl.scale = 0.0;
         }
-        HTBarLabel *newLbl = (HTBarLabel *)self.stv.arrangedSubviews[index];
+        HTBarLabel *newLbl = (HTBarLabel *)self.stv.arrangedSubviews[self.index];
         newLbl.scale = 1.0;
+        CGRect frame = self.segment.frame;
+        frame.origin.x = [UIScreen mainScreen].bounds.size.width / 5 * self.index + 10;
+        self.segment.frame = frame;
     }];
+    self.currentNewsController.isRefreshing = NO;
+    HTNewsViewController *newsController = [self addNewsControllerIfNotPresent:self.index];
+    self.currentNewsController = newsController;
+    if(!newsController.isRefreshing){
+         [newsController scrollToRefreshTable];
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    CGRect frame = self.segment.frame;
+    frame.origin.x = scrollView.contentOffset.x / 5 + 10;
+    self.segment.frame = frame;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 

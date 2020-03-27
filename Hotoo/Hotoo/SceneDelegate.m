@@ -19,7 +19,7 @@
     MainTabBarController *tc = [[MainTabBarController alloc] init];
     UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:tc];
     nc.navigationBar.translucent = YES;
-    nc.navigationBar.barTintColor = [UIColor orange_ht];
+    nc.navigationBar.barTintColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
     self.window.rootViewController = nc;
     [self.window makeKeyAndVisible];
     

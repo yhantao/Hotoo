@@ -22,6 +22,12 @@
 		D15856A6240EF10400BBBDF9 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D15856A4240EF10400BBBDF9 /* MainInterface.storyboard */; };
 		D15856AA240EF10400BBBDF9 /* HTSharedExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D158569F240EF10400BBBDF9 /* HTSharedExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D15856B1240EF3A100BBBDF9 /* HTShareCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D15856B0240EF3A100BBBDF9 /* HTShareCell.m */; };
+		D177CEFB241ABBFB0067CEFC /* HTImageZoomingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D177CEFA241ABBFB0067CEFC /* HTImageZoomingManager.m */; };
+		D177CEFE241C04560067CEFC /* HTImageEnlargeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = D177CEFD241C04560067CEFC /* HTImageEnlargeEntity.m */; };
+		D177CF00241C961C0067CEFC /* LifeNewsURLs.plist in Resources */ = {isa = PBXBuildFile; fileRef = D177CEFF241C961C0067CEFC /* LifeNewsURLs.plist */; };
+		D177CF03241C97D60067CEFC /* LifeNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D177CF02241C97D60067CEFC /* LifeNewsViewController.m */; };
+		D177CF06241F3FAB0067CEFC /* HTHotWordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D177CF05241F3FAB0067CEFC /* HTHotWordCell.m */; };
+		D177CF092420853B0067CEFC /* HTViewUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D177CF082420853B0067CEFC /* HTViewUtil.m */; };
 		D17D8CCD23F21FB200490DCF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D17D8CCC23F21FB200490DCF /* AppDelegate.m */; };
 		D17D8CD023F21FB200490DCF /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D17D8CCF23F21FB200490DCF /* SceneDelegate.m */; };
 		D17D8CD323F21FB200490DCF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D17D8CD223F21FB200490DCF /* ViewController.m */; };
@@ -29,6 +35,9 @@
 		D17D8CDE23F21FB400490DCF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D17D8CDD23F21FB400490DCF /* main.m */; };
 		D17D8CE723F221BE00490DCF /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D17D8CE623F221BE00490DCF /* MainTabBarController.m */; };
 		D17D8CEE23F2245000490DCF /* HTBarLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D17D8CED23F2245000490DCF /* HTBarLabel.m */; };
+		D19143D4242DB39700738678 /* MJRefresh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D19143D3242DB39700738678 /* MJRefresh.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D19143D6242DB39700738678 /* ReactiveObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D19143D5242DB39700738678 /* ReactiveObjC.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D19143D8242DB39700738678 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D19143D7242DB39700738678 /* SDWebImage.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D1D6147C2401061D00623C69 /* NewsURLs.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1D6147B2401061D00623C69 /* NewsURLs.plist */; };
 		D1D6147F2401AC8C00623C69 /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D6147E2401AC8C00623C69 /* NewsViewController.m */; };
 		D1D614862402395400623C69 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D614852402395400623C69 /* DataManager.m */; };
@@ -440,6 +449,17 @@
 		D15856A7240EF10400BBBDF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D15856AF240EF3A100BBBDF9 /* HTShareCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTShareCell.h; sourceTree = "<group>"; };
 		D15856B0240EF3A100BBBDF9 /* HTShareCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTShareCell.m; sourceTree = "<group>"; };
+		D177CEF9241ABBFB0067CEFC /* HTImageZoomingManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTImageZoomingManager.h; sourceTree = "<group>"; };
+		D177CEFA241ABBFB0067CEFC /* HTImageZoomingManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTImageZoomingManager.m; sourceTree = "<group>"; };
+		D177CEFC241C04560067CEFC /* HTImageEnlargeEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTImageEnlargeEntity.h; sourceTree = "<group>"; };
+		D177CEFD241C04560067CEFC /* HTImageEnlargeEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTImageEnlargeEntity.m; sourceTree = "<group>"; };
+		D177CEFF241C961C0067CEFC /* LifeNewsURLs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = LifeNewsURLs.plist; sourceTree = "<group>"; };
+		D177CF01241C97D60067CEFC /* LifeNewsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LifeNewsViewController.h; sourceTree = "<group>"; };
+		D177CF02241C97D60067CEFC /* LifeNewsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LifeNewsViewController.m; sourceTree = "<group>"; };
+		D177CF04241F3FAB0067CEFC /* HTHotWordCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTHotWordCell.h; sourceTree = "<group>"; };
+		D177CF05241F3FAB0067CEFC /* HTHotWordCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTHotWordCell.m; sourceTree = "<group>"; };
+		D177CF072420853B0067CEFC /* HTViewUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTViewUtil.h; sourceTree = "<group>"; };
+		D177CF082420853B0067CEFC /* HTViewUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTViewUtil.m; sourceTree = "<group>"; };
 		D17D8CC823F21FB200490DCF /* Hotoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hotoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D17D8CCB23F21FB200490DCF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D17D8CCC23F21FB200490DCF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -454,6 +474,9 @@
 		D17D8CE623F221BE00490DCF /* MainTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		D17D8CEC23F2245000490DCF /* HTBarLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTBarLabel.h; sourceTree = "<group>"; };
 		D17D8CED23F2245000490DCF /* HTBarLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTBarLabel.m; sourceTree = "<group>"; };
+		D19143D3242DB39700738678 /* MJRefresh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MJRefresh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D19143D5242DB39700738678 /* ReactiveObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ReactiveObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D19143D7242DB39700738678 /* SDWebImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1D6147B2401061D00623C69 /* NewsURLs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = NewsURLs.plist; sourceTree = "<group>"; };
 		D1D6147D2401AC8C00623C69 /* NewsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsViewController.h; sourceTree = "<group>"; };
 		D1D6147E2401AC8C00623C69 /* NewsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
@@ -492,6 +515,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D19143D4242DB39700738678 /* MJRefresh.framework in Frameworks */,
+				D19143D6242DB39700738678 /* ReactiveObjC.framework in Frameworks */,
+				D19143D8242DB39700738678 /* SDWebImage.framework in Frameworks */,
 				560C16547A1297C19336E623 /* Pods_Hotoo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -511,6 +537,9 @@
 		789406329EA33EF29EC08A74 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D19143D3242DB39700738678 /* MJRefresh.framework */,
+				D19143D5242DB39700738678 /* ReactiveObjC.framework */,
+				D19143D7242DB39700738678 /* SDWebImage.framework */,
 				D13FBF3E24083F8E0098F45D /* ReactiveCocoa.framework */,
 				D13FBF4024083F8E0098F45D /* SDWebImage.framework */,
 				D13FBF3A24083E8F0098F45D /* libReactiveCocoa.a */,
@@ -985,6 +1014,8 @@
 				D17D8CE623F221BE00490DCF /* MainTabBarController.m */,
 				D1D6147D2401AC8C00623C69 /* NewsViewController.h */,
 				D1D6147E2401AC8C00623C69 /* NewsViewController.m */,
+				D177CF01241C97D60067CEFC /* LifeNewsViewController.h */,
+				D177CF02241C97D60067CEFC /* LifeNewsViewController.m */,
 				D1D6148E240345DB00623C69 /* HTNewsViewController.h */,
 				D1D6148F240345DB00623C69 /* HTNewsViewController.m */,
 				D1D614912403751000623C69 /* HTNewsDetailViewController.h */,
@@ -1016,6 +1047,10 @@
 				D13FC02B240D70BC0098F45D /* HTSimilarNewsCell.m */,
 				D15856AF240EF3A100BBBDF9 /* HTShareCell.h */,
 				D15856B0240EF3A100BBBDF9 /* HTShareCell.m */,
+				D177CEF9241ABBFB0067CEFC /* HTImageZoomingManager.h */,
+				D177CEFA241ABBFB0067CEFC /* HTImageZoomingManager.m */,
+				D177CF04241F3FAB0067CEFC /* HTHotWordCell.h */,
+				D177CF05241F3FAB0067CEFC /* HTHotWordCell.m */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -1024,6 +1059,7 @@
 			isa = PBXGroup;
 			children = (
 				D1D6147B2401061D00623C69 /* NewsURLs.plist */,
+				D177CEFF241C961C0067CEFC /* LifeNewsURLs.plist */,
 			);
 			path = config;
 			sourceTree = "<group>";
@@ -1055,6 +1091,8 @@
 				D13FC022240AF9270098F45D /* HTSimilarNewsEntity.h */,
 				D13FC023240AF9270098F45D /* HTSimilarNewsEntity.m */,
 				D13FC029240B61710098F45D /* HTDetailEntity.h */,
+				D177CEFC241C04560067CEFC /* HTImageEnlargeEntity.h */,
+				D177CEFD241C04560067CEFC /* HTImageEnlargeEntity.m */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1064,6 +1102,8 @@
 			children = (
 				D1D6149E2405E19D00623C69 /* HTColorUtil.h */,
 				D1D6149F2405E19D00623C69 /* HTColorUtil.m */,
+				D177CF072420853B0067CEFC /* HTViewUtil.h */,
+				D177CF082420853B0067CEFC /* HTViewUtil.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1161,6 +1201,7 @@
 				D1D614A22405F57C00623C69 /* Launch Screen1.storyboard in Resources */,
 				D17D8CD823F21FB400490DCF /* Assets.xcassets in Resources */,
 				D1D6147C2401061D00623C69 /* NewsURLs.plist in Resources */,
+				D177CF00241C961C0067CEFC /* LifeNewsURLs.plist in Resources */,
 				D13FC028240B05980098F45D /* HTNewsDetails.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1226,6 +1267,7 @@
 				D1D6149C240596C800623C69 /* HTTabBar.m in Sources */,
 				D1D614A02405E19E00623C69 /* HTColorUtil.m in Sources */,
 				D1D6149924049DF000623C69 /* HTImagesNewsCell.m in Sources */,
+				D177CF06241F3FAB0067CEFC /* HTHotWordCell.m in Sources */,
 				D17D8CD323F21FB200490DCF /* ViewController.m in Sources */,
 				D17D8CE723F221BE00490DCF /* MainTabBarController.m in Sources */,
 				D13FC02C240D70BC0098F45D /* HTSimilarNewsCell.m in Sources */,
@@ -1233,6 +1275,8 @@
 				D17D8CDE23F21FB400490DCF /* main.m in Sources */,
 				D13FC01B240A1F290098F45D /* HTNewsDetailsEntity.m in Sources */,
 				D15856B1240EF3A100BBBDF9 /* HTShareCell.m in Sources */,
+				D177CF03241C97D60067CEFC /* LifeNewsViewController.m in Sources */,
+				D177CEFB241ABBFB0067CEFC /* HTImageZoomingManager.m in Sources */,
 				D1D61490240345DB00623C69 /* HTNewsViewController.m in Sources */,
 				D17D8CEE23F2245000490DCF /* HTBarLabel.m in Sources */,
 				D1D614932403751000623C69 /* HTNewsDetailViewController.m in Sources */,
@@ -1247,8 +1291,10 @@
 				D17D8CD023F21FB200490DCF /* SceneDelegate.m in Sources */,
 				D1D6148A240306F900623C69 /* HTNewsEntity.m in Sources */,
 				D1D614862402395400623C69 /* DataManager.m in Sources */,
+				D177CF092420853B0067CEFC /* HTViewUtil.m in Sources */,
 				D1D6147F2401AC8C00623C69 /* NewsViewController.m in Sources */,
 				D13FC021240A281D0098F45D /* HTNewsDetailsModel.m in Sources */,
+				D177CEFE241C04560067CEFC /* HTImageEnlargeEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1438,11 +1484,13 @@
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
+					"-ObjC",
 					"-framework",
 					"\"ImageIO\"",
 					"-framework",
 					"\"SDWebImage\"",
-					"-ObjC",
+					"-framework",
+					"\"MJRefresh\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hantao.hotoo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1467,11 +1515,13 @@
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
+					"-ObjC",
 					"-framework",
 					"\"ImageIO\"",
 					"-framework",
 					"\"SDWebImage\"",
-					"-ObjC",
+					"-framework",
+					"\"MJRefresh\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hantao.hotoo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

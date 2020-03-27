@@ -23,5 +23,8 @@
 + (UIColor *)brown_ht{
     return [UIColor colorWithRed:157.0/255 green:82.0/255 blue:44.0/255 alpha:1];
 }
++ (UIColor *)blue_ht{
+    return [UIColor colorWithRed:78.0/255 green:131.0/255 blue:206.0/255 alpha:1];
+}
 
 @end

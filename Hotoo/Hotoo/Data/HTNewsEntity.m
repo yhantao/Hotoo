@@ -24,6 +24,10 @@
     [model setValue:dict[@"hasHead"] forKey:@"hasHead"];
     [model setValue:dict[@"docid"] forKey:@"docid"];
     [model setValue:dict[@"boardid"] forKey:@"boardid"];
+    [model setValue:dict[@"photosetID"] forKey:@"photosetID"];
+    [model setValue:dict[@"votecount"] forKey:@"votecount"];
+    [model setValue:dict[@"priority"] forKey:@"priority"];
+    [model setValue:dict[@"quality"] forKey:@"quality"];
     
     // extra imgs
     if (dict[@"imgextra"] && [dict[@"imgextra"] isKindOfClass:[NSArray class]]){
@@ -45,8 +49,14 @@
     }
     
     // ptime
-    NSString *pt = [model.ptime substringWithRange:NSMakeRange(5, 11)];
-    model.ptime = pt;
+    NSString *ptime = [model.ptime substringWithRange:NSMakeRange(5, 11)];
+    model.ptime = ptime;
+    
+    
+    // source
+    NSString *trimmedSource = [model.source stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    model.source = trimmedSource;
+    
     return model;
 }
 

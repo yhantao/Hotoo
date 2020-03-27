@@ -8,6 +8,12 @@
 
 #import "HTHeadNewsCell.h"
 #import "SDWebImage.h"
+#import "HTImageZoomingManager.h"
+@interface HTHeadNewsCell()
+
+@property (nonatomic, strong) HTImageZoomingManager *manager;
+
+@end
 
 @implementation HTHeadNewsCell
 
@@ -77,6 +83,17 @@
 }
 
 - (void)layoutCellWithModel:(HTNewsEntity *)model{
+    
+    // manager photo set id
+    if(model.photosetID && model.photosetID.length > 0){
+        // gesture
+        self.manager = [[HTImageZoomingManager alloc] initWithPhotoSetID:model.photosetID];
+        self.img.userInteractionEnabled = YES;
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget: self.manager action:@selector(viewTapped:)];
+        [self.img addGestureRecognizer:gesture];
+        
+    }
+    
     // title
     self.title.text = model.title;
     
@@ -88,7 +105,13 @@
     [self.src.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:10].active = YES;
     
     // reply count
-    self.replyCount.text = [NSString stringWithFormat:@"  %@ 跟帖  ", model.replyCount];
+    NSString *replyCountText;
+    if([model.replyCount intValue] > 10000){
+        replyCountText = [NSString stringWithFormat:@"  %.1f 万跟帖  ", [model.replyCount intValue] / 10000.0];
+    }else{
+        replyCountText = [NSString stringWithFormat:@"  %@ 跟帖  ", model.replyCount];;
+    }
+    self.replyCount.text = replyCountText;
     self.replyCount.frame = CGRectMake(self.src.frame.origin.x + self.src.frame.size.width + 10, 50, 100, 20);
     [self.replyCount sizeToFit];
     self.replyCount.layer.cornerRadius = 5.0f;

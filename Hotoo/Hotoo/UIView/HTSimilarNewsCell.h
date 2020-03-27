@@ -18,7 +18,7 @@
 @property (nonatomic, weak) UILabel *replyCount;
 @property (nonatomic, weak) UILabel *ptime;
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier isNotLast:(BOOL)notLast;
 
 - (void)layoutCellWithModel:(HTSimilarNewsEntity *)model;
 
