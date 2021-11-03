@@ -13,7 +13,7 @@ Finish the main functionality of news feeds and hot search page，using a naviga
 
 News table have 3 types of cell/model，and will render a cell to a corresponding data model.
 
-###### 3.Dependencies
+### 3.Dependencies
 cocoapods, MJRefresh，ReactiveCocoa，SDWebImage，(seems like iOS 13.3.1 gets some problem with reactive objc, and is still under testing)，currently only support iOS 13.0+ and iPhone X+.
 >1. Install Xcode 4.4.1 (or newer) from the Mac App Store.<br />
 >2. Open Xcode, and go to Preferences, then select the Downloads tab.<br />
@@ -39,7 +39,7 @@ and
 ```
 pod install
 ```
-###### 3.Demo pages
+### Demo pages (screenshots)
 <img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo2.jpg" alt="Drawing" width="400px" /> <img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo4.jpg" alt="Drawing" width="400px" />
 
 <img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo5.jpg" alt="Drawing" width="400px" /> <img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo6.jpg" alt="Drawing" width="400px" />
