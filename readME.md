@@ -41,7 +41,7 @@ and
 pod install
 ```
 ###### 3.Demo pages
-<img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo2.jpg" alt="Drawing" width="160px" /> <img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo3.jpg" alt="Drawing" width="160px" />
+<img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo2.jpg" alt="Drawing" width="300px" /> <img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo3.jpg" alt="Drawing" width="300px" />
 
 <img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo4.jpg" alt="Drawing" width="160px" />
 <img src="https://github.com/yhantao/Hotoo/blob/master/Hotoo/demo/HTNews_demo5.jpg" alt="Drawing" width="160px" />
