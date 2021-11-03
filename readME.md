@@ -8,8 +8,7 @@ Add UIActivityController to fulfill share function
 ### March 2rd update
 Add the recommendataion news feeds in detail page，slightly tweak the structure of detailed page，from a whole WKWebView to UITableView including 2 sections to manage WKWebView and related article cell，and will add app extension for sharing later.
 
-### 2月29日更新
-###### 1.概括
+### Feb 29th update
 Finish the main functionality of news feeds and hot search page，using a navigation controller to wrap a tabbar controller. Different news feeds controllers are children controller under tabbar controller's news tab，Using scroll view on the top of page or tap to switch between each news topi. Will introduce caching strategy later to improve the memory performance, and also lazy load each tableview to avoid leaks.
 
 News table have 3 types of cell/model，and will render a cell to a corresponding data model.
